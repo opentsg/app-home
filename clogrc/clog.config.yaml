@@ -1,0 +1,10 @@
+---
+# yamllint disable rule:colons
+snippets:
+  # --- git snippets clog git <snippet> ----------------------------------------
+  git:
+    tag:
+        ref: yq -r '.[0].version' releases.yaml
+  project:
+    config: |
+      export PROJECT="opentsg-app-home"

@@ -1,9 +1,9 @@
 {
   "yaml.format.bracketSpacing": false,
   "cSpell.customDictionaries": {
-    "cspell-this-project": {
-      "name": "cspell-this-project",
-      "path": "${workspaceRoot}/.vscode/cspell-this-project.txt",
+    "cspell-app-home": {
+      "name": "cspell-app-home",
+      "path": "${workspaceRoot}/.vscode/cspell-app-home.txt",
       "description": "Words used in this project",
       "addWords": true
     },
@@ -11,8 +11,9 @@
     "internal-terms": false // Disable the `internal-terms` dictionary
   },
   "cSpell.dictionaries": [
-    "cspell-this-project"
+    "cspell-app-home"
   ],
+  "workbench.colorTheme": "Quiet Light",
   // Default number of spaces a tab is equal to.
   "editor.tabSize": 2,
   // Insert spaces when pressing Tab.

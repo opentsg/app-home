@@ -1,4 +1,4 @@
-package main
+package podserver
 
 import (
 	"embed"
@@ -42,7 +42,7 @@ var tpl = DashTemplates{
 }
 
 // iterate over the embedded source files and init the templates
-func initTemplates(fs embed.FS) {
+func InitialiseTemplates(fs embed.FS) {
 	// make a new logs template by parsing the collection of named templates
 	tpl.err = template.Must(template.ParseFS(fs, tpl.errSrc...))
 	tpl.landing = template.Must(template.ParseFS(fs, tpl.landingSrc...))

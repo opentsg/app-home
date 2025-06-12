@@ -1,7 +1,7 @@
 // Copyright ©2022-2024 Mr MXF   info@mrmxf.com
 // BSD-3-Clause License   https://opensource.org/license/bsd-3-clause/
 
-package main
+package podserver
 
 import (
 	"log/slog"
@@ -13,7 +13,7 @@ func RouteLanding(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
 
 	jobsData := TDLanding{
-		Title:      "opentsg-studio in Minikube",
+		Title:      "opentsg-studio in Docker",
 		Ptr:        "", // relative path to the root folder nothing
 	}
 

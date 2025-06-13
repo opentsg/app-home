@@ -14,8 +14,8 @@ import (
 
 	"github.com/mrmxf/clog/gommi"
 	"github.com/mrmxf/clog/slogger"
-	"github.com/opentsg/landing-page/podserver"
-	"github.com/opentsg/landing-page/www"
+	"github.com/opentsg/app-home/podserver"
+	"github.com/opentsg/app-home/www"
 )
 
 // the default port to serve data is 8080

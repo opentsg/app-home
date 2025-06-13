@@ -64,6 +64,7 @@ snippets:
   bc-wants-stage-flow:  yq -r '.[0].flow|select(.=="stage")' "$(clog bc-releases-yaml)"
   bc-wants-test-flow:  yq -r '.[0].flow|select(.=="test")' "$(clog bc-releases-yaml)"
   bc-wants-schedule-flow:  yq -r '.[0].flow|select(.=="schedule")' "$(clog bc-releases-yaml)"
+  bc-message-file: echo "tmp/workflow-message"
   bc-logs-hr: eval "$(clog Crayon)";for i in {1..8};do HR="$HR\e[09${i}m▬▬▬▬▬▬▬▬▬$cE|";done;printf "$HR$cX\n"
   # ---------------------------------------------------------------------------------------------------------
   watch: hugo server --port=1313 --logLevel debug --buildDrafts --buildFuture --buildExpired --cleanDestinationDir
@@ -80,8 +81,9 @@ snippets:
       [[ "$b" == main ]] && echo "" || echo "$b"|tr -d '[:blank:]'
   project:
     config: |
-      # make some variables for standard build scripts
       export PROJECT="opentsg-app-home"
+      export DOCKER_NS="opentsg"
+
     has:
       git-lfs: |
         git lfs --version 2>/dev/null|grep -oE '[0-9]+\.[0-9]+\.[0-9]+'|head -1
@@ -109,7 +111,7 @@ snippets:
 #  |_.__/  \_,_| |_| |_| \__,_|       |_||_|  \_,_| \__, | \___/
 #                                                   |___/       
   build-hugo: |
-    eval "$(clog Source project config)\n $(clog Crayon)" # setting & highlights
+    eval "$(clog Source project config); $(clog Crayon)" # setting & highlights
     doPROD="$1"
     modeMSG="$2"
 
@@ -125,12 +127,13 @@ snippets:
     hugo build --minify --logLevel info $opt
   # ------------------------------------------------------------------------------
   build-podserver: |
-    eval "$(clog Source project config)\n $(clog Crayon)" # setting & highlights
+    eval "$(clog Source project config); $(clog Crayon)" # setting & highlights
     doPROD="$1"
     modeMSG="$2"
 
     ERR=0
     clog Log -I "$STEP.$(((++s))).⚒️  build podserver $modeMSG→$cF tmp/"
+    mkdir -p tmp/
 
     help="tpl/help-golang.sh"    # build helpers
     eval "$(clog Cat $help)"
@@ -141,7 +144,7 @@ snippets:
     clog Log -B "$ERR" "$doPROD" "✅ build-podserver $modeMSG→$cS tmp/$cX ok" "❌ build-podserver  $modeMSG→$cE tmp/$cX failed" || exit 1; #abort if PROD
   # ------------------------------------------------------------------------------
   build-ko: |
-    eval "$(clog Source project config)\n $(clog Crayon)" # setting & highlights
+    eval "$(clog Source project config); $(clog Crayon)" # setting & highlights
     doPROD="$1"
     modeMSG="$2"
 
@@ -177,7 +180,7 @@ snippets:
     modeMSG="$(clog bc-prod-logic-build)"
     [[ "${modeMSG:0:4}" == "prod" ]] && doPROD="prod"
 
-    eval "$(clog Source project config)\n $(clog Crayon)" # setting & highlight
+    eval "$(clog Source project config); $(clog Crayon)" # setting & highlight
     clog Log -I  "🤖 build $modeMSG$cS $PROJECT$cX MAKE:$cC $MAKE"
 
     ERR=0; export STEP=0
@@ -191,7 +194,7 @@ snippets:
     ((STEP++));clog Should MAKE "ko"        && clog build-ko        "$doPROD" "$modeMSG" && clog bc-logs-hr || exit 1
     icon="✅";[ $ERR -gt 0 ] && icon="❌"
     printf -v MSG "$icon build $modeMSG complete with %d errors" $ERR
-    echo "$modeMSG" > "$(clog workflow-message-file)"
+    echo "$modeMSG" > "$(clog bc-message-file)"
     clog Log -B "$ERR" "$doPROD" "✅ golang build ok - $modeMSG" "❌ golang build failed - $modeMSG" || exit 1; #abort if PROD
     exit 0
 # =============================================================================

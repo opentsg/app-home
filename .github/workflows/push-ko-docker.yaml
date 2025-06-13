@@ -12,8 +12,8 @@ name: push-ko-docker
 run-name: "🥷${{ github.actor }}: 🏃‍➡️ ${{ github.workflow }} @ ${{ github.event.repository.name }}:${{ github.ref_name }}"
 on:
   push:                         # run every push
-    tags-ignore:                # ignore pushes that are also tags
-      - '*'
+    # tags-ignore:                # ignore pushes that are also tags
+    #   - '*'
   workflow_dispatch:            # run manually from Actions tab
 
 # Default to bash

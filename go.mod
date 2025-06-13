@@ -1,4 +1,4 @@
-module github.com/opentsg/landing-page
+module github.com/opentsg/app-home
 
 go 1.24.2
 
@@ -18,4 +18,5 @@ require (
 	golang.org/x/xerrors v0.0.0-20220907171357-04be3eba64a2 // indirect
 )
 
-// replace github.com/mrmxf/clog => ../../pub-mrmxf/clog
+// internal dev only
+// replace github.com/mrmxf/clog => ../../0_mrmxf/clog

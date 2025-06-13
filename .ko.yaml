@@ -1,6 +1,6 @@
 defaultPlatforms:
-  - linux/arm64
   - linux/amd64
+  - linux/arm64
 builds:
   - id: amd64          # ID of the build.
     dir: .                 # default is .

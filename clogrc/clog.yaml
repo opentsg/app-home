@@ -197,6 +197,8 @@ snippets:
     echo "$modeMSG" > "$(clog bc-message-file)"
     clog Log -B "$ERR" "$doPROD" "✅ golang build ok - $modeMSG" "❌ golang build failed - $modeMSG" || exit 1; #abort if PROD
     exit 0
+  test-dev: |
+    docker run --rm -p "8080:8080" opentsg/app-home:latest-dev
 # =============================================================================
 #    ___   _                 _
 #   / __| | |_    ___   __  | |__

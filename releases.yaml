@@ -1,3 +1,3 @@
-# target:"stage",   build:"dev"  = auto-add to staging server
-# target:"release", build:"prod" = to flag as a production release
-- {version: "0.7.16", date: 2025-06-13, target: "stage", build: "dev", note: v0.8 rc}
+# flow:"stage",   build:"dev"  = auto-add to staging server
+# flow:"release", build:"prod" = to flag as a production release
+- {version: "0.7.16", date: 2025-06-13, flow: "stage", build: "dev", note: v0.8 rc}
